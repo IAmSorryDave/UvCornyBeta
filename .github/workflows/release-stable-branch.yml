@@ -4,11 +4,11 @@ on:
   push:
     branches: beta
 
-permissions: write-all
-
 jobs:
 
     increment:
+      permissions:
+        contents: write
       runs-on: ubuntu-latest
 
       steps:
@@ -46,7 +46,7 @@ jobs:
             file_pattern: pyproject.toml
 
     release:
-      permissions: # Read more at : https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
+      permissions:
         contents: write
       name: Create Branch
       needs: increment
