@@ -47,6 +47,13 @@ jobs:
             commit_message: "chore: bump beta version to ${{ steps.version.outputs.version }}"
             file_pattern: pyproject.toml
 
+        - name: Create Git Tag
+          run: |
+            git tag -a v${{ steps.version.outputs.version }} -m "Release ${{ steps.version.outputs.version }}"
+            git push origin v${{ steps.version.outputs.version }}
+
+        
+
     release:
       permissions: # Read more at : https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs
         contents: write
