@@ -1,16 +1,14 @@
 name: Spawn Stable Branch 🗒️
 
 on: 
-  pull_request:
+  push:
     branches: beta
-    types: closed
 
 permissions: write-all
 
 jobs:
 
     increment:
-      if: github.event.pull_request.merged == true
       runs-on: ubuntu-latest
 
       steps:
@@ -47,12 +45,12 @@ jobs:
             commit_message: "chore: bump beta version to ${{ steps.version.outputs.version }}"
             file_pattern: pyproject.toml
 
-        - name: Create Git Tag
-          run: |
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git tag -a v${{ steps.version.outputs.version }} -m "Release ${{ steps.version.outputs.version }}"
-            git push origin v${{ steps.version.outputs.version }}
+        # - name: Create Git Tag
+        #   run: |
+        #     git config user.name "github-actions[bot]"
+        #     git config user.email "github-actions[bot]@users.noreply.github.com"
+        #     git tag -a v${{ steps.version.outputs.version }} -m "Release ${{ steps.version.outputs.version }}"
+        #     git push origin v${{ steps.version.outputs.version }}
        
 
     release:
