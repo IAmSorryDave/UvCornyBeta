@@ -3,7 +3,7 @@ name: TestPyPI Release
 on:
   push:
     branches:
-      - 'release@v*.*.*rc*'
+      - 'release@v[0-9]+.[0-9]+.[0-9]+rc[0-9]+'
 
 permissions:
   contents: write
