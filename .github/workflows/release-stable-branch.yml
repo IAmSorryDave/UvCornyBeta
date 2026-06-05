@@ -71,6 +71,7 @@ jobs:
             git config user.email "github-actions@github.com"
             git checkout beta
             git checkout -b release@v${VERSION}
+            git push origin release@v${VERSION}
 
 
         
