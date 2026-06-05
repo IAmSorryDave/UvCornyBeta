@@ -49,7 +49,7 @@ jobs:
 
         - name: Create Git Tag
           run: |
-            git tag -a v${{ steps.version.outputs.version }} -m "Release ${{ steps.version.outputs.version }}"
+            git tag v${{ steps.version.outputs.version }} -m "Release ${{ steps.version.outputs.version }}"
             git push origin v${{ steps.version.outputs.version }}
 
         
