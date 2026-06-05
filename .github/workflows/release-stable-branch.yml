@@ -37,7 +37,7 @@ jobs:
           id: version
           shell: bash
           run: |
-            VERSION=$(uv version)
+            VERSION=$(uv version --short)
             echo "version=$VERSION" >> $GITHUB_OUTPUT
   
         - name: Commit & Push Version Change
