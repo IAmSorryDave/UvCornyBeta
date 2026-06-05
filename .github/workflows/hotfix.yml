@@ -3,7 +3,7 @@ name: Test Hotfix Branch 🧯
 on:
   pull_request:
     branches:
-      -  v/hotfix/*.*.*.rc*
+      -  'v/hotfix/v[0-9]+.[0-9]+.[0-9]+rc[0-9]+'
     types: opened
 
 permissions:
@@ -81,6 +81,6 @@ jobs:
       - name: Commit & Push Version Change
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
-          branch: v/hotfix/*.*.*.rc*
+          branch: 'v/hotfix/*.*.*.rc*'
           commit_message: "chore: added patch; bump rc version to ${{ steps.version.outputs.version }}"
           file_pattern: pyproject.toml
