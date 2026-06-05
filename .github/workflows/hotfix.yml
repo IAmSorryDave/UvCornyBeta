@@ -3,7 +3,7 @@ name: Test Hotfix Branch 🧯
 on:
   pull_request:
     branches:
-      -  'v/hotfix/*.*.*.rc*'
+      -  'v/hotfix/v[0-9]+.[0-9]+.[0-9]+rc[0-9]+'
     types: opened
 
 permissions:
