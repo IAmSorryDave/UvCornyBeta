@@ -51,7 +51,7 @@ jobs:
   increment:
     needs: test
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: success()
     steps:
       - name: Checkout Project
         uses: actions/checkout@v6
