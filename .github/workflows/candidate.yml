@@ -127,5 +127,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git checkout candidate
-          git checkout -b v/hotfix/$(uv version --short)
-          git push origin v/hotfix/$(uv version --short)
+          git checkout -b hotfix
+          git push origin hotfix
