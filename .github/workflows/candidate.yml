@@ -2,16 +2,13 @@
 name: Spawn Release Canidate 🧪
 
 on:
-  pull_request:
+  push: 
     branches:
       - candidate
-    types:
-      - closed
 
 jobs:
 
   increment:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
