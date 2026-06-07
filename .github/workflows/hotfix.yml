@@ -51,7 +51,7 @@ jobs:
   increment:
     needs: test
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
+    if: success()
     steps:
       - name: Checkout Project
         uses: actions/checkout@v6
@@ -63,11 +63,11 @@ jobs:
       
       - name: Dry Run Version Increment
         run: |
-          uv version --bump patch --dry-run
+          uv version --bump patch --bump rc --dry-run
 
       - name: Version Increment
         run: |
-          uv version --bump patch
+          uv version --bump patch --bump rc
 
       - name: Verify Version Changed
         run: git diff --exit-code pyproject.toml || echo "Version updated successfully"
