@@ -1,9 +1,10 @@
 name: TestPyPI Release
 
 on:
-  push:
-    branches:
-      - release@v*.*.*.rc*
+  workflow_run:
+    workflows:
+      - candidate
+    types: completed
 
 permissions:
   contents: write
@@ -77,6 +78,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v6
+        with:
+          ref: candidate
 
       - name: Setup UV
         uses: astral-sh/setup-uv@v7
