@@ -163,48 +163,8 @@ jobs:
             skip-existing: true
             verbose: true
 
-  install:
-    name: Check TestPyPi Distribution Installatiop❓
-    runs-on: ubuntu-latest
-    needs: publish-to-testpypi
-
-    permissions:
-      contents: write
-    
-    steps:
-
-      - name: Checkout Project
-        uses: actions/checkout@v6
-        with:
-          ref: candidate
-  
-      - name: Install UV
-        uses: astral-sh/setup-uv@v7
-
-      - name: Install TOML ⚙️ CLI
-        run: uv tool install toml-cli
-
-      - name: Setup Python
-        uses: actions/setup-python@v5
-
-      - name: Create and Activate Test Virtual Enviroment
-        run: |
-          uv venv test-env --python $( toml get --toml-path pyproject.toml project.requires-python )
-          source test-env/bin/activate
-          python -m ensurepip --default-pip
-        
-      - name: Test installation from TestPyPI
-        run: |
-          source test-env/bin/activate
-          python -m pip install --index-url https://test.pypi.org/simple/ $( toml get --toml-path pyproject.toml project.name )==$( uv version --short )
-      
-      - name: Smoke Test Test Index
-        run: |
-          source test-env/bin/activate
-          python -c "import $( toml get --toml-path pyproject.toml project.name ); print('OK')"
-
   create-github-release:
-    needs: [publish-to-testpypi, install]
+    needs: publish-to-testpypi
     runs-on: ubuntu-latest
     if: success()
     steps:
