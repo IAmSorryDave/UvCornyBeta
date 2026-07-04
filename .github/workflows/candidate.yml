@@ -199,7 +199,9 @@ jobs:
           python -m pip install --index-url https://test.pypi.org/simple/ $( toml get --toml-path pyproject.toml project.name )==$( uv version --short )
       
       - name: Smoke Test Test Index
-        run: python -c "import $( toml get --toml-path pyproject.toml project.name ); print('OK')"
+        run: |
+          source test-env/bin/activate
+          python -c "import $( toml get --toml-path pyproject.toml project.name ); print('OK')"
 
   create-github-release:
     needs: [publish-to-testpypi, install]
