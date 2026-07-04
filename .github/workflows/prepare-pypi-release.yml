@@ -41,13 +41,13 @@ jobs:
       - name: Install UV
         uses: astral-sh/setup-uv@v7
       
-      - name: Dry Run Version Increment
+      - name: Dry Run Stable Version Increment
         run: |
-          uv version --bump major --bump stable --dry-run
+          uv version --bump stable --dry-run
 
-      - name: Version Increment
+      - name: Stable Version Increment
         run: |
-          uv version --bump major --bump stable
+          uv version --bump stable 
 
       - name: Verify Version Changed
         run: git diff --exit-code pyproject.toml || echo "Version updated successfully"
@@ -61,14 +61,3 @@ jobs:
           name: pypi-python-package-distributions
           path: dist/
           retention-days: 1
-  close:
-    name: Close ❎ Pull Request ☑️ 
-    needs: build
-    runs-on: ubuntu-latest
-    steps:    
-      - name: Auto-Merge Pull Request
-        if: success()
-        run: gh pr merge ${{ github.event.pull_request.number }} --auto --merge
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-   
