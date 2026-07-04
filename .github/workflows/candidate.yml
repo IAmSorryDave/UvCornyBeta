@@ -192,6 +192,7 @@ jobs:
         
       - name: Test installation from TestPyPI
         run: |
+          source test-env/bin/activate
           python -m pip install --index-url https://test.pypi.org/simple/ $( toml get --toml-path pyproject.toml project.name )==$( uv version --short )
       
       - name: Smoke Test Test Index
