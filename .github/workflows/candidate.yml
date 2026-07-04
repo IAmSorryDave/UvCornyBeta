@@ -191,7 +191,7 @@ jobs:
         
       - name: Test installation from TestPyPI
         run: |
-          uv pip install --index-url https://test.pypi.org/simple/ $( toml get --toml-path pyproject.toml project.name )==$( uv version )
+          uv pip install --index-url https://test.pypi.org/simple/ $( toml get --toml-path pyproject.toml project.name )==$( uv version --short )
       
       - name: Smoke Test Test Index
         run: uv run python -c "import $( toml get --toml-path pyproject.toml project.name ); print('OK')"
