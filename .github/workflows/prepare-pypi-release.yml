@@ -40,14 +40,22 @@ jobs:
 
       - name: Install UV
         uses: astral-sh/setup-uv@v7
-      
-      - name: Dry Run Version Increment
-        run: |
-          uv version --bump major --bump stable --dry-run
 
-      - name: Version Increment
+      - name: Dry Run Major Version Increment
         run: |
-          uv version --bump major --bump stable
+          uv version --bump major --dry-run
+
+      - name: Dry Run Major Version Increment
+        run: |
+          uv version --bump major 
+      
+      - name: Dry Run Stable Version Increment
+        run: |
+          uv version --bump stable --dry-run
+
+      - name: Stable Version Increment
+        run: |
+          uv version --bump stable 
 
       - name: Verify Version Changed
         run: git diff --exit-code pyproject.toml || echo "Version updated successfully"
