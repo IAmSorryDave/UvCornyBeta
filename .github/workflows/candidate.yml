@@ -184,6 +184,9 @@ jobs:
       - name: Install TOML ⚙️ CLI
         run: uv tool install toml-cli
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+
       - name: Create and Activate Test Virtual Enviroment
         run: |
           uv venv test-env --python $( toml get --toml-path pyproject.toml project.requires-python )
