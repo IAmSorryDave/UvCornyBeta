@@ -184,14 +184,15 @@ jobs:
       - name: Install TOML ⚙️ CLI
         run: uv tool install toml-cli
 
-      - name: Create Test Virtual Enviroment
+      - name: Create and Activate Test Virtual Enviroment
         run: |
           uv venv test-env --python $( toml get --toml-path pyproject.toml project.requires-python )
+          source test-env/bin/activate
+          python -m ensurepip --default-pip
         
       - name: Test installation from TestPyPI
         run: |
-          source test-env/bin/activate
-          python -m ensurepip --default-pip install --index-url https://test.pypi.org/simple/ $( toml get --toml-path pyproject.toml project.name )==$( uv version --short )
+          python -m pip install --index-url https://test.pypi.org/simple/ $( toml get --toml-path pyproject.toml project.name )==$( uv version --short )
       
       - name: Smoke Test Test Index
         run: python -c "import $( toml get --toml-path pyproject.toml project.name ); print('OK')"
