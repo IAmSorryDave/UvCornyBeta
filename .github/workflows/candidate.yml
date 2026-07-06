@@ -72,6 +72,8 @@ jobs:
           name: release-canidate-python-package-distributions
           path: dist/
           retention-days: 3
+          if-no-files-found: error
+          overwrite: 'true'
 
   hotfix:
     permissions: # Read more at : https://docs.github.com/en/actions/using-jobs/assigning-permissions-to-jobs

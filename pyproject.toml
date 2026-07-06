@@ -1,6 +1,6 @@
 [project]
 name = "uvcornybeta"
-version = "0.2.1rc31"
+version = "0.2.1rc34"
 description = "Add your description here"
 readme = "README.md"
 authors = [

@@ -13,9 +13,62 @@ permissions:
   id-token: write
 
 jobs:
-  publish-to-pypi:
+
+  build:
     if: github.event.pull_request.merged == true
+    name: Build Distribution 📦; Cache Distribution ⬆️
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      
+    steps:
+    
+      - name: Checkout Project
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version-file: "pyproject.toml"
+  
+      - name: Checkout Project
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v7
+      
+      - name: Dry Run Stable Version Increment
+        run: |
+          uv version --bump stable --dry-run
+
+      - name: Stable Version Increment
+        run: |
+          uv version --bump stable 
+
+      - name: Verify Version Changed
+        run: git diff --exit-code pyproject.toml || echo "Version updated successfully"
+
+      - name: Build Distribution
+        run: uv build
+
+      - name: Store Distribution Packages
+        uses: actions/upload-artifact@v7
+        with:
+          name: pypi-python-package-distributions
+          path: dist/
+          if-no-files-found: error
+          overwrite: 'true'
+          retention-days: 1
+
+  publish-to-pypi:
     name: Publish Python 🐍 Distribution 📦 to PyPi
+    needs: build
     runs-on: ubuntu-latest
     environment:
       name: pypi
