@@ -24,21 +24,7 @@ jobs:
     steps:
     
       - name: Checkout Project
-        uses: actions/checkout@v6
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version-file: "pyproject.toml"
-  
-      - name: Checkout Project
-        uses: actions/checkout@v6
-        with:
-          persist-credentials: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v7
 
       - name: Install UV
         uses: astral-sh/setup-uv@v7
@@ -103,21 +89,18 @@ jobs:
     steps:
 
       - name: Checkout Project
-        uses: actions/checkout@v6
-        with:
-          persist-credentials: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/checkout@v7
 
       - name: Install UV
         uses: astral-sh/setup-uv@v7
       
-      - name: Dry Run Version Increment
+      - name: Dry Run Stable Version Increment
         run: |
-          uv version --bump major --bump stable --dry-run
+          uv version --bump stable --dry-run
 
-      - name: Version Increment
+      - name: Stable Version Increment
         run: |
-          uv version --bump major --bump stable
+          uv version --bump stable
 
       - name: Verify Version Changed
         run: git diff --exit-code pyproject.toml || echo "Version updated successfully"
