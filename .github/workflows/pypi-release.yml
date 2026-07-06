@@ -34,7 +34,7 @@ jobs:
         name: pypi-python-package-distributions
         path: dist/
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        workflow: producer
+        workflow: prepare-pypi-release
         run_conclusion: success
     
     - name: Publish Distribution 📦 to PyPI
