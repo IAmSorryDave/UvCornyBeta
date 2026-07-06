@@ -67,7 +67,7 @@ jobs:
         run: uv build
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-canidate-python-package-distributions
           path: dist/
@@ -86,9 +86,6 @@ jobs:
         with:
           ref: candidate
           fetch-depth: 0
-
-      - name: Setup UV
-        uses: astral-sh/setup-uv@v7
 
       - name: Setup UV
         uses: astral-sh/setup-uv@v7
@@ -114,9 +111,6 @@ jobs:
         with:
           ref: hotfix
           fetch-depth: 0  # Fetch all history
-
-      - name: Setup UV
-        uses: astral-sh/setup-uv@v7
 
       - name: Setup UV
         uses: astral-sh/setup-uv@v7

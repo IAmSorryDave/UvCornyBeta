@@ -60,4 +60,6 @@ jobs:
         with:
           name: pypi-python-package-distributions
           path: dist/
+          if-no-files-found: error
+          overwrite: 'true'
           retention-days: 1
