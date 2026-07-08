@@ -83,9 +83,6 @@ jobs:
       with:
         name: pypi-python-package-distributions
         path: dist/
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        workflow: prepare-pypi-release
-        run_conclusion: success
     
     - name: Publish Distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
