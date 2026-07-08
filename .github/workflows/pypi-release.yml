@@ -127,16 +127,9 @@ jobs:
       - name: Verify Version Changed
         run: git diff --exit-code pyproject.toml || echo "Version updated successfully"
 
-      - name: Extract Version
-        id: version
-        shell: bash
-        run: |
-          VERSION=$( uv version )
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-
       - name: Tag release
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
           branch: main
-          commit_message: "Released v$(uv version)"
-          tag_name: "v$(uv version)"
+          commit_message: "Released v$(uv version --short)"
+          tag_name: "v$(uv version --short)"
