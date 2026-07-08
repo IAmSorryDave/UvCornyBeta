@@ -1,0 +1,2 @@
+def wiz():
+    return "BANG"
