@@ -19,12 +19,12 @@ jobs:
     steps:
     
     - name: Checkout Project
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Install UV
-      uses: astral-sh/setup-uv@v7
+      uses: astral-sh/setup-uv@v8
 
     - name: Log Major Version
       id: version
@@ -39,4 +39,5 @@ jobs:
         branch: development
         commit_message: "chore: bump development version to ${{ steps.version.outputs.version }}"
         file_pattern: pyproject.toml
+        
         
