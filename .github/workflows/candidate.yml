@@ -20,7 +20,7 @@ jobs:
           ref: candidate
   
       - name: Install UV
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v8
       
       - name: Dry Run Version Increment
         run: |
@@ -84,13 +84,13 @@ jobs:
     steps:
     
       - name: Checkout Code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: candidate
           fetch-depth: 0
 
       - name: Setup UV
-        uses: astral-sh/setup-uv@v7
+        uses: astral-sh/setup-uv@v8
 
       - name: Create release branch from version
         run: |
@@ -109,7 +109,7 @@ jobs:
     steps:
     
       - name: Checkout Code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: hotfix
           fetch-depth: 0  # Fetch all history
