@@ -84,7 +84,7 @@ jobs:
     steps:
     
       - name: Checkout Code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: candidate
           fetch-depth: 0
@@ -109,7 +109,7 @@ jobs:
     steps:
     
       - name: Checkout Code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: hotfix
           fetch-depth: 0  # Fetch all history
